@@ -5,13 +5,12 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-
+import org.usfirst.frc.team68.robot.commands.Auton1;
+import org.usfirst.frc.team68.robot.commands.Auton2;
 import org.usfirst.frc.team68.robot.subsystems.AirPump;
 import org.usfirst.frc.team68.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team68.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team68.robot.subsystems.Intake;
 import org.usfirst.frc.team68.robot.subsystems.Latches;
-
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -48,10 +47,10 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData(airPump);
 		SmartDashboard.putData(latches);
 		SmartDashboard.putData(intake);
-//        chooser = new SendableChooser();
-//        chooser.addDefault("Default Auto", new DriveWithJoysticks());
-//        chooser.addObject("My Auto", new MyAutoCommand());
-//        SmartDashboard.putData("Auto mode", chooser);
+        chooser = new SendableChooser();
+        chooser.addDefault("Auton Default", new Auton1());
+        chooser.addObject("Auton Two", new Auton2());
+        SmartDashboard.putData("Auto mode", chooser);
 		oi = OI.getOI();
 
     }
@@ -81,16 +80,16 @@ public class Robot extends IterativeRobot {
     public void autonomousInit() {
         autonomousCommand = (Command) chooser.getSelected();
         
-		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
-		switch(autoSelected) {
-		case "My Auto":
-			autonomousCommand = new MyAutoCommand();
-			break;
-		case "Default Auto":
-		default:
-			autonomousCommand = new ExampleCommand();
-			break;
-		} */
+//		String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
+//		switch(autoSelected) {
+//		case "Auton1":
+//			autonomousCommand = new Auton1();
+//			break;
+//		case "Auton2":
+//		default:
+//			autonomousCommand = new Auton2();
+//			break;
+//		} 
     	
     	// schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();
