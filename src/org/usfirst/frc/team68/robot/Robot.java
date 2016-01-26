@@ -5,7 +5,13 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+
+import org.usfirst.frc.team68.robot.subsystems.AirPump;
 import org.usfirst.frc.team68.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team68.robot.subsystems.ExampleSubsystem;
+import org.usfirst.frc.team68.robot.subsystems.Intake;
+import org.usfirst.frc.team68.robot.subsystems.Latches;
+
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -20,6 +26,9 @@ public class Robot extends IterativeRobot {
 
 	public static OI oi;
 	public static DriveTrain driveTrain;
+	public static AirPump airPump;
+	public static Latches latches;
+	public static Intake intake;
 
     Command autonomousCommand;
     SendableChooser chooser;
@@ -29,14 +38,22 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
+
     	driveTrain = DriveTrain.getDrive();
-		oi = new OI();
+    	airPump = AirPump.getAir();
+    	latches = Latches.getLatches();
+    	intake = Intake.getIntake();
 		SmartDashboard.putData(Scheduler.getInstance());
 		SmartDashboard.putData(driveTrain);
+		SmartDashboard.putData(airPump);
+		SmartDashboard.putData(latches);
+		SmartDashboard.putData(intake);
 //        chooser = new SendableChooser();
 //        chooser.addDefault("Default Auto", new DriveWithJoysticks());
 //        chooser.addObject("My Auto", new MyAutoCommand());
 //        SmartDashboard.putData("Auto mode", chooser);
+		oi = OI.getOI();
+
     }
 	
 	/**
