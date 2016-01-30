@@ -2,42 +2,37 @@
 package org.usfirst.frc.team68.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-
 import org.usfirst.frc.team68.robot.Robot;
 
-public class DriveAtSpeed extends Command {
+/**
+ *
+ */
+public class CloseGate extends Command {
 	
-//	  private double distance;
-	  private double speed;
-	  private double timeout;
-//	  private double angle;
+	private boolean isFinished = false;
 
-    public DriveAtSpeed(double speed, double timeout) {
+    public CloseGate() {
         // Use requires() here to declare subsystem dependencies
-        this.speed = speed;
-        this.timeout = timeout;	
-        requires(Robot.driveTrain);
+        requires(Robot.gate);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	setTimeout(timeout);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveTrain.tankDrive(speed, speed);
+    	Robot.gate.closeGate();
+    	isFinished = true;
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return this.isTimedOut();
+        return isFinished;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	speed = 0;
-    	Robot.driveTrain.tankDrive(speed, speed);
     }
 
     // Called when another command which requires one or more of the same

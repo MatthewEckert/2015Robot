@@ -18,7 +18,7 @@ public class AirPump extends Subsystem {
 	}
 	
 	private AirPump(){
-		compressor = new Compressor(RobotMap.pcmMain);
+		compressor = new Compressor(RobotMap.PCM_MAIN);
 	}
     
     // Put methods for controlling this subsystem

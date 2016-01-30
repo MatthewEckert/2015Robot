@@ -41,8 +41,13 @@ public class OI {
 	private Joystick leftJoy;
 	private Joystick rightJoy;
 	private Joystick xboxController;
+	private Button xboxA;
+	private Button xboxB;
+	private Button xboxX;
+	private Button xboxY;
 	private Button xboxRB;
 	private Button xboxLB;
+	
 	private static OI oi;
 	
 	public static OI getOI(){
@@ -53,14 +58,16 @@ public class OI {
 	}
 	
 	private OI(){
-		leftJoy = new Joystick(RobotMap.leftJoystick);
-		rightJoy = new Joystick(RobotMap.rightJoystick);
-		xboxController = new Joystick(RobotMap.xBoxController);
+		leftJoy = new Joystick(RobotMap.LEFT_JOYSTICK);
+		rightJoy = new Joystick(RobotMap.RIGHT_JOYSTICK);
+		xboxController = new Joystick(RobotMap.XBOX_CONTROLLER);
 		
-		xboxRB = new JoystickButton(xboxController, RobotMap.xboxRB);
+		xboxRB = new JoystickButton(xboxController, RobotMap.XBOX_RB);
 		xboxRB.whenPressed(new ReverseCurrentIntakePosition());
-		xboxLB = new JoystickButton(xboxController, RobotMap.xboxLB);
+		xboxLB = new JoystickButton(xboxController, RobotMap.XBOX_LB);
 		xboxLB.whenPressed(new ReverseCurrentLatchPosition());
+		xboxA = new JoystickButton(xboxController, RobotMap.XBOX_A);
+		xboxA.whenPressed(new ReverseCurrentGatePosition());
 		
 		SmartDashboard.putData("Open Latches", new OpenLatches());
 		SmartDashboard.putData("Open Intake", new OpenIntake());
@@ -68,7 +75,6 @@ public class OI {
 		SmartDashboard.putData("Close Intake", new CloseIntake());
 	    SmartDashboard.putData("Reverse Intake", new ReverseCurrentIntakePosition());
 	    SmartDashboard.putData("Reverse Latches", new ReverseCurrentLatchPosition());
-
 	}
 	
     public double getLeftJoystickValue() {
@@ -89,7 +95,7 @@ public class OI {
     
     public double getLeftXboxJoystickValue() {
 		double leftAxis;
-		leftAxis = xboxController.getRawAxis(RobotMap.xboxLY);
+		leftAxis = xboxController.getRawAxis(RobotMap.XBOX_LY);
 		// Allow for up to 10% of joystick noise
 		leftAxis = (Math.abs(leftAxis) < 0.1) ? 0 : leftAxis;
     	return leftAxis*-1;
@@ -97,7 +103,7 @@ public class OI {
     
     public double getRightXboxJoystickValue() {
 		double rightAxis;
-		rightAxis = xboxController.getRawAxis(RobotMap.xboxRY);
+		rightAxis = xboxController.getRawAxis(RobotMap.XBOX_RY);
 		// Allow for up to 10% of joystick noise
 		rightAxis = (Math.abs(rightAxis) < 0.1) ? 0 : rightAxis;
     	return rightAxis;

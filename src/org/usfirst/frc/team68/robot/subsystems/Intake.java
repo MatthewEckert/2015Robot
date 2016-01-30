@@ -29,10 +29,10 @@ public class Intake extends Subsystem {
     }
 	
 	private Intake(){
-		p45 = new DoubleSolenoid(RobotMap.pcmMain,RobotMap.intakeForward,RobotMap.intakeReverse);
+		p45 = new DoubleSolenoid(RobotMap.PCM_MAIN,RobotMap.INTAKE_FORWARD,RobotMap.INTAKE_REVERSE);
 		this.openIntake();
-		intakeLF = new VictorSP(RobotMap.intakeLF);
-		intakeRF = new VictorSP(RobotMap.intakeRF);
+		intakeLF = new VictorSP(RobotMap.INTAKE_LF_MOTOR);
+		intakeRF = new VictorSP(RobotMap.INTAKE_RF_MOTOR);
 	}
     
     // Put methods for controlling this subsystem

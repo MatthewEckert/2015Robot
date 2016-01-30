@@ -9,6 +9,7 @@ import org.usfirst.frc.team68.robot.commands.Auton1;
 import org.usfirst.frc.team68.robot.commands.Auton2;
 import org.usfirst.frc.team68.robot.subsystems.AirPump;
 import org.usfirst.frc.team68.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team68.robot.subsystems.Gate;
 import org.usfirst.frc.team68.robot.subsystems.Intake;
 import org.usfirst.frc.team68.robot.subsystems.Latches;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -23,11 +24,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends IterativeRobot {
 
-	public static OI oi;
 	public static DriveTrain driveTrain;
 	public static AirPump airPump;
 	public static Latches latches;
 	public static Intake intake;
+	public static Gate gate;
+	public static OI oi;
 
     Command autonomousCommand;
     SendableChooser chooser;
@@ -37,22 +39,21 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-
     	driveTrain = DriveTrain.getDrive();
     	airPump = AirPump.getAir();
     	latches = Latches.getLatches();
     	intake = Intake.getIntake();
+    	gate = Gate.getGate();
+        chooser = new SendableChooser();
+        chooser.addDefault("Auton Default", new Auton1());
+        chooser.addObject("Auton Two", new Auton2());
+        SmartDashboard.putData("Auto mode", chooser);
 		SmartDashboard.putData(Scheduler.getInstance());
 		SmartDashboard.putData(driveTrain);
 		SmartDashboard.putData(airPump);
 		SmartDashboard.putData(latches);
 		SmartDashboard.putData(intake);
-        chooser = new SendableChooser();
-        chooser.addDefault("Auton Default", new Auton1());
-        chooser.addObject("Auton Two", new Auton2());
-        SmartDashboard.putData("Auto mode", chooser);
 		oi = OI.getOI();
-
     }
 	
 	/**
@@ -79,19 +80,7 @@ public class Robot extends IterativeRobot {
 	 */
     public void autonomousInit() {
         autonomousCommand = (Command) chooser.getSelected();
-        
-//		String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
-//		switch(autoSelected) {
-//		case "Auton1":
-//			autonomousCommand = new Auton1();
-//			break;
-//		case "Auton2":
-//		default:
-//			autonomousCommand = new Auton2();
-//			break;
-//		} 
-    	
-    	// schedule the autonomous command (example)
+    	// schedule the autonomous command 
         if (autonomousCommand != null) autonomousCommand.start();
     }
 

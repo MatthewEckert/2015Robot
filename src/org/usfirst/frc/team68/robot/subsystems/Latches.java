@@ -18,7 +18,7 @@ public class Latches extends Subsystem {
 	}
 	
 	private Latches(){
-		p01 = new DoubleSolenoid(RobotMap.pcmMain,RobotMap.latchForward,RobotMap.latchReverse);
+		p01 = new DoubleSolenoid(RobotMap.PCM_MAIN,RobotMap.LATCH_FORWARD,RobotMap.LATCH_REVERSE);
 		this.openLatches();
 	}
     

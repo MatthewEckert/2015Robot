@@ -32,10 +32,10 @@ public class DriveTrain extends Subsystem {
 	private DriveTrain() {
 			    
 		// Instantiate Drive Motors
-		leftFront = new CANTalon(RobotMap.driveLeftFront);
-		rightFront = new CANTalon(RobotMap.driveRightFront);
-		leftRear = new CANTalon(RobotMap.driveLeftRear);
-		rightRear = new CANTalon(RobotMap.driveRightRear);
+		leftFront = new CANTalon(RobotMap.DRIVE_LEFT_FRONT);
+		rightFront = new CANTalon(RobotMap.DRIVE_RIGHT_FRONT);
+		leftRear = new CANTalon(RobotMap.DRIVE_LEFT_REAR);
+		rightRear = new CANTalon(RobotMap.DRIVE_RIGHT_REAR);
 
 		// Create the drive train
 		drive = new RobotDrive(leftFront, leftRear, rightFront, rightRear);
